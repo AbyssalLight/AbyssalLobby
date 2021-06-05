@@ -1,0 +1,10 @@
+{
+    "name": "AbyssalItemVotes",
+    "version_number": "1.0.0",
+    "website_url": "https://github.com/AbyssalLight/AbyssalItemVotes",
+    "description": "Enable and Disable Items within survivor selection menu",
+    "dependencies": [
+    		"bbepis-BepInExPack-5.4.9",
+		"tristanmcpherson-R2API-3.0.30"
+    ]
+}
