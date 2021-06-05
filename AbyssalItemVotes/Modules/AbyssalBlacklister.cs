@@ -9,7 +9,7 @@ namespace AbyssalItemVotes.Modules
 {
     [BepInDependency("com.bepis.r2api")]
 
-    [BepInPlugin("com.AbyssalLight.AbyssalBlacklister", "AbyssalBlackLister", "1.0.0")]
+    [BepInPlugin("com.AbyssalLight.AbyssalBlacklister", "AbyssalBlackLister", "1.0.1")]
 
     class AbyssalBlacklister : BaseUnityPlugin
     {
