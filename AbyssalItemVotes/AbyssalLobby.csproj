@@ -62,6 +62,9 @@
     <Reference Include="R2API">
       <HintPath>T:\Projects\Ikaruga's Beginings\libs\R2API.dll</HintPath>
     </Reference>
+    <Reference Include="ScrollableLobbyUI">
+      <HintPath>C:\Users\sampo\Downloads\KingEnderBrine-ScrollableLobbyUI-1.6.2\ScrollableLobbyUI.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
       <HintPath>T:\Projects\Ikaruga's Beginings\libs\Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
