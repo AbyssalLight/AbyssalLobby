@@ -9,7 +9,7 @@ namespace AbyssalItemVotes.Modules
 {
     [BepInDependency("com.bepis.r2api")]
 
-    [BepInPlugin("com.AbyssalLight.AbyssalBlacklister", "AbyssalBlackLister", "0.0.1")]
+    [BepInPlugin("com.AbyssalLight.AbyssalBlacklister", "AbyssalBlackLister", "1.0.0")]
 
     class AbyssalBlacklister : BaseUnityPlugin
     {
@@ -168,6 +168,7 @@ namespace AbyssalItemVotes.Modules
 				}
 				foreach (EquipmentIndex equipmentIndex2 in from i in list6
 														   where EquipmentCatalog.GetEquipmentDef(i).canDrop
+														   orderby EquipmentCatalog.GetEquipmentDef(i).isLunar
 														   select i)
 				{
 					RuleCatalog.AddRule(RuleDef.FromEquipment(equipmentIndex2));
