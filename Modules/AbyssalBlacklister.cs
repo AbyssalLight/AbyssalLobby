@@ -176,7 +176,8 @@ namespace AbyssalItemVotes.Modules
 
                 #region RuleDefs
                 RuleCatalog.AddCategory("RULE_HEADER_MISC", "", new Color32(192, 192, 192, byte.MaxValue), null, "", new Func<bool>(RuleCatalog.HiddenTestFalse), RuleCatalog.RuleCategoryType.VoteResultGrid);
-				RuleDef ruleDef = new RuleDef("Misc.StartingMoney", "RULE_MISC_STARTING_MONEY");
+                #region Def1
+                RuleDef ruleDef = new RuleDef("Misc.StartingMoney", "RULE_MISC_STARTING_MONEY");
 				RuleChoiceDef ruleChoiceDef = ruleDef.AddChoice("0", 0U, true);
 				ruleChoiceDef.tooltipNameToken = "RULE_STARTINGMONEY_CHOICE_0_NAME";
 				ruleChoiceDef.tooltipBodyToken = "RULE_STARTINGMONEY_CHOICE_0_DESC";
@@ -195,7 +196,9 @@ namespace AbyssalItemVotes.Modules
 				ruleChoiceDef3.tooltipNameColor = ColorCatalog.GetColor(ColorCatalog.ColorIndex.LunarCoin);
 				ruleChoiceDef3.onlyShowInGameBrowserIfNonDefault = true;
 				RuleCatalog.AddRule(ruleDef);
-				RuleDef ruleDef2 = new RuleDef("Misc.StageOrder", "RULE_MISC_STAGE_ORDER");
+                #endregion
+                #region Def2
+                RuleDef ruleDef2 = new RuleDef("Misc.StageOrder", "RULE_MISC_STAGE_ORDER");
 				RuleChoiceDef ruleChoiceDef4 = ruleDef2.AddChoice("Normal", StageOrder.Normal, true);
 				ruleChoiceDef4.tooltipNameToken = "RULE_STAGEORDER_CHOICE_NORMAL_NAME";
 				ruleChoiceDef4.tooltipBodyToken = "RULE_STAGEORDER_CHOICE_NORMAL_DESC";
@@ -209,7 +212,9 @@ namespace AbyssalItemVotes.Modules
 				ruleChoiceDef5.tooltipNameColor = ColorCatalog.GetColor(ColorCatalog.ColorIndex.LunarCoin);
 				ruleChoiceDef5.onlyShowInGameBrowserIfNonDefault = true;
 				RuleCatalog.AddRule(ruleDef2);
-				RuleDef ruleDef3 = new RuleDef("Misc.KeepMoneyBetweenStages", "RULE_MISC_KEEP_MONEY_BETWEEN_STAGES");
+                #endregion
+                #region Def3
+                RuleDef ruleDef3 = new RuleDef("Misc.KeepMoneyBetweenStages", "RULE_MISC_KEEP_MONEY_BETWEEN_STAGES");
 				RuleChoiceDef ruleChoiceDef6 = ruleDef3.AddChoice("On", true, true);
 				ruleChoiceDef6.tooltipNameToken = "";
 				ruleChoiceDef6.tooltipBodyToken = "RULE_KEEPMONEYBETWEENSTAGES_CHOICE_ON_DESC";
@@ -220,7 +225,9 @@ namespace AbyssalItemVotes.Modules
 				ruleChoiceDef7.onlyShowInGameBrowserIfNonDefault = true;
 				ruleDef3.MakeNewestChoiceDefault();
 				RuleCatalog.AddRule(ruleDef3);
-				RuleDef ruleDef4 = new RuleDef("Misc.AllowDropIn", "RULE_MISC_ALLOW_DROP_IN");
+                #endregion
+                #region Def4
+                RuleDef ruleDef4 = new RuleDef("Misc.AllowDropIn", "RULE_MISC_ALLOW_DROP_IN");
 				RuleChoiceDef ruleChoiceDef8 = ruleDef4.AddChoice("On", true, true);
 				ruleChoiceDef8.tooltipNameToken = "";
 				ruleChoiceDef8.tooltipBodyToken = "RULE_ALLOWDROPIN_CHOICE_ON_DESC";
@@ -231,7 +238,8 @@ namespace AbyssalItemVotes.Modules
 				ruleChoiceDef9.onlyShowInGameBrowserIfNonDefault = true;
 				ruleDef4.MakeNewestChoiceDefault();
 				RuleCatalog.AddRule(ruleDef4);
-				for (int k = 0; k < RuleCatalog.allRuleDefs.Count; k++)
+                #endregion
+                for (int k = 0; k < RuleCatalog.allRuleDefs.Count; k++)
 				{
 					RuleDef ruleDef5 = RuleCatalog.allRuleDefs[k];
 					ruleDef5.globalIndex = k;
