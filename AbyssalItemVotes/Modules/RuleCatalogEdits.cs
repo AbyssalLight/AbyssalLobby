@@ -1,4 +1,6 @@
-﻿using RoR2;
+﻿using R2API;
+using RoR2;
+using RoR2.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -248,6 +250,50 @@ namespace AbyssalLobby.Modules
             #endregion
 
             RuleCatalog.availability.MakeAvailable();
+        }
+
+        public static RuleDef ItemDescriptions(On.RoR2.RuleDef.orig_FromItem orig, ItemIndex itemIndex)
+        {
+            ItemDef itemDef = ItemCatalog.GetItemDef(itemIndex);
+            RuleDef ruleDef = new RuleDef("Items." + itemDef.name, itemDef.nameToken);
+            RuleChoiceDef ruleChoiceDef = ruleDef.AddChoice("On", null, false);
+            ruleChoiceDef.sprite = itemDef.pickupIconSprite;
+            ruleChoiceDef.tooltipNameToken = itemDef.nameToken;
+            ruleChoiceDef.tooltipBodyToken = itemDef.descriptionToken; // line edit
+            ruleChoiceDef.unlockable = itemDef.unlockableDef;
+            ruleChoiceDef.itemIndex = itemIndex;
+            ruleChoiceDef.onlyShowInGameBrowserIfNonDefault = true;
+            ruleDef.MakeNewestChoiceDefault();
+            RuleChoiceDef ruleChoiceDef2 = ruleDef.AddChoice("Off", null, false);
+            ruleChoiceDef2.spritePath = "Textures/MiscIcons/texUnlockIcon";
+            ruleChoiceDef2.tooltipNameToken = itemDef.nameToken;
+            ruleChoiceDef2.getTooltipName = new Func<RuleChoiceDef, string>(RuleChoiceDef.GetOffTooltipNameFromToken);
+            ruleChoiceDef2.tooltipBodyToken = itemDef.descriptionToken; // line edit
+            ruleChoiceDef2.onlyShowInGameBrowserIfNonDefault = true;
+            return ruleDef;
+        }
+
+        public static RuleDef EquipmentDescriptions(On.RoR2.RuleDef.orig_FromEquipment orig ,EquipmentIndex equipmentIndex)
+        {
+            EquipmentDef equipmentDef = EquipmentCatalog.GetEquipmentDef(equipmentIndex);
+            RuleDef ruleDef = new RuleDef("Equipment." + equipmentDef.name, equipmentDef.nameToken);
+            RuleChoiceDef ruleChoiceDef = ruleDef.AddChoice("On", null, false);
+            ruleChoiceDef.sprite = equipmentDef.pickupIconSprite;
+            ruleChoiceDef.tooltipNameToken = equipmentDef.nameToken;
+            ruleChoiceDef.tooltipBodyToken = equipmentDef.descriptionToken; // line edit
+            ruleChoiceDef.unlockable = equipmentDef.unlockableDef;
+            ruleChoiceDef.equipmentIndex = equipmentIndex;
+            ruleChoiceDef.availableInMultiPlayer = equipmentDef.appearsInMultiPlayer;
+            ruleChoiceDef.availableInSinglePlayer = equipmentDef.appearsInSinglePlayer;
+            ruleChoiceDef.onlyShowInGameBrowserIfNonDefault = true;
+            ruleDef.MakeNewestChoiceDefault();
+            RuleChoiceDef ruleChoiceDef2 = ruleDef.AddChoice("Off", null, false);
+            ruleChoiceDef2.spritePath = "Textures/MiscIcons/texUnlockIcon"; // line edit
+            ruleChoiceDef2.tooltipNameToken = equipmentDef.nameToken;
+            ruleChoiceDef2.getTooltipName = new Func<RuleChoiceDef, string>(RuleChoiceDef.GetOffTooltipNameFromToken);
+            ruleChoiceDef2.tooltipBodyToken = equipmentDef.descriptionToken; // line edit
+            ruleChoiceDef2.onlyShowInGameBrowserIfNonDefault = true;
+            return ruleDef;
         }
     }
 }

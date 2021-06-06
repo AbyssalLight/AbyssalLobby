@@ -2,12 +2,10 @@
 
 namespace AbyssalLobby.Modules
 {
-    internal static class AbyssalTokens
+    internal class AbyssalTokens
     {
         internal static void AddTokens()
         {
-
-
             LanguageAPI.Add("RULE_HEADER_ITEMS_TIER1", "Common Items");
             LanguageAPI.Add("RULE_HEADER_ITEMS_TIER1_SUBTITLE", "Vote on Common Items 'Default: Enabled'");
 
@@ -22,6 +20,7 @@ namespace AbyssalLobby.Modules
 
             LanguageAPI.Add("RULE_HEADER_ITEMS_TIER_BOSS", "Boss Items");
             LanguageAPI.Add("RULE_HEADER_ITEMS_TIER_BOSS_SUBTITLE", "Vote on Boss Items 'Default: Enabled'");
+
         }
     }
 }

@@ -19,6 +19,9 @@ namespace AbyssalLobby.Modules
             On.RoR2.RuleCatalog.HiddenTestItemsConvar += RuleCatalogEdits.RuleCatalogHiddenTestItemsConvar;
             On.RoR2.RuleCatalog.HiddenTestTrue += RuleCatalogEdits.RuleCatalogHiddenTestTrue;
             On.RoR2.RuleCatalog.Init += RuleCatalogEdits.RuleCatalogInit;
+            On.RoR2.RuleDef.FromItem += RuleCatalogEdits.ItemDescriptions;
+            On.RoR2.RuleDef.FromEquipment += RuleCatalogEdits.EquipmentDescriptions;
+
             On.RoR2.UI.RuleCategoryController.SetData += lobbyImprovments.LobbyUI;
 
         }
