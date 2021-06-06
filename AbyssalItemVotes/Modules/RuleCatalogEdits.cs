@@ -166,6 +166,70 @@ namespace AbyssalLobby.Modules
             #endregion
 
             #region RuleDefs
+            RuleCatalog.AddCategory("RULE_HEADER_MISC", "", new Color32(192, 192, 192, byte.MaxValue), null, "", new Func<bool>(RuleCatalog.HiddenTestFalse), RuleCatalog.RuleCategoryType.VoteResultGrid);
+            #region Def1
+            RuleDef ruleDef = new RuleDef("Misc.StartingMoney", "RULE_MISC_STARTING_MONEY");
+            RuleChoiceDef ruleChoiceDef = ruleDef.AddChoice("0", 0U, true);
+            ruleChoiceDef.tooltipNameToken = "RULE_STARTINGMONEY_CHOICE_0_NAME";
+            ruleChoiceDef.tooltipBodyToken = "RULE_STARTINGMONEY_CHOICE_0_DESC";
+            ruleChoiceDef.tooltipNameColor = ColorCatalog.GetColor(ColorCatalog.ColorIndex.LunarCoin);
+            ruleChoiceDef.onlyShowInGameBrowserIfNonDefault = true;
+            RuleChoiceDef ruleChoiceDef2 = ruleDef.AddChoice("15", 15U, true);
+            ruleChoiceDef2.tooltipNameToken = "RULE_STARTINGMONEY_CHOICE_15_NAME";
+            ruleChoiceDef2.tooltipBodyToken = "RULE_STARTINGMONEY_CHOICE_15_DESC";
+            ruleChoiceDef2.tooltipNameColor = ColorCatalog.GetColor(ColorCatalog.ColorIndex.LunarCoin);
+            ruleChoiceDef2.onlyShowInGameBrowserIfNonDefault = true;
+            ruleDef.MakeNewestChoiceDefault();
+            RuleChoiceDef ruleChoiceDef3 = ruleDef.AddChoice("50", 50U, true);
+            ruleChoiceDef3.tooltipNameToken = "RULE_STARTINGMONEY_CHOICE_50_NAME";
+            ruleChoiceDef3.tooltipBodyToken = "RULE_STARTINGMONEY_CHOICE_50_DESC";
+            ruleChoiceDef3.spritePath = "Textures/MiscIcons/texRuleBonusStartingMoney";
+            ruleChoiceDef3.tooltipNameColor = ColorCatalog.GetColor(ColorCatalog.ColorIndex.LunarCoin);
+            ruleChoiceDef3.onlyShowInGameBrowserIfNonDefault = true;
+            RuleCatalog.AddRule(ruleDef);
+            #endregion
+            #region Def2
+            RuleDef ruleDef2 = new RuleDef("Misc.StageOrder", "RULE_MISC_STAGE_ORDER");
+            RuleChoiceDef ruleChoiceDef4 = ruleDef2.AddChoice("Normal", StageOrder.Normal, true);
+            ruleChoiceDef4.tooltipNameToken = "RULE_STAGEORDER_CHOICE_NORMAL_NAME";
+            ruleChoiceDef4.tooltipBodyToken = "RULE_STAGEORDER_CHOICE_NORMAL_DESC";
+            ruleChoiceDef4.tooltipNameColor = ColorCatalog.GetColor(ColorCatalog.ColorIndex.LunarCoin);
+            ruleChoiceDef4.onlyShowInGameBrowserIfNonDefault = true;
+            ruleDef2.MakeNewestChoiceDefault();
+            RuleChoiceDef ruleChoiceDef5 = ruleDef2.AddChoice("Random", StageOrder.Random, true);
+            ruleChoiceDef5.tooltipNameToken = "RULE_STAGEORDER_CHOICE_RANDOM_NAME";
+            ruleChoiceDef5.tooltipBodyToken = "RULE_STAGEORDER_CHOICE_RANDOM_DESC";
+            ruleChoiceDef5.spritePath = "Textures/MiscIcons/texRuleMapIsRandom";
+            ruleChoiceDef5.tooltipNameColor = ColorCatalog.GetColor(ColorCatalog.ColorIndex.LunarCoin);
+            ruleChoiceDef5.onlyShowInGameBrowserIfNonDefault = true;
+            RuleCatalog.AddRule(ruleDef2);
+            #endregion
+            #region Def3
+            RuleDef ruleDef3 = new RuleDef("Misc.KeepMoneyBetweenStages", "RULE_MISC_KEEP_MONEY_BETWEEN_STAGES");
+            RuleChoiceDef ruleChoiceDef6 = ruleDef3.AddChoice("On", true, true);
+            ruleChoiceDef6.tooltipNameToken = "";
+            ruleChoiceDef6.tooltipBodyToken = "RULE_KEEPMONEYBETWEENSTAGES_CHOICE_ON_DESC";
+            ruleChoiceDef6.onlyShowInGameBrowserIfNonDefault = true;
+            RuleChoiceDef ruleChoiceDef7 = ruleDef3.AddChoice("Off", false, true);
+            ruleChoiceDef7.tooltipNameToken = "";
+            ruleChoiceDef7.tooltipBodyToken = "RULE_KEEPMONEYBETWEENSTAGES_CHOICE_OFF_DESC";
+            ruleChoiceDef7.onlyShowInGameBrowserIfNonDefault = true;
+            ruleDef3.MakeNewestChoiceDefault();
+            RuleCatalog.AddRule(ruleDef3);
+            #endregion
+            #region Def4
+            RuleDef ruleDef4 = new RuleDef("Misc.AllowDropIn", "RULE_MISC_ALLOW_DROP_IN");
+            RuleChoiceDef ruleChoiceDef8 = ruleDef4.AddChoice("On", true, true);
+            ruleChoiceDef8.tooltipNameToken = "";
+            ruleChoiceDef8.tooltipBodyToken = "RULE_ALLOWDROPIN_CHOICE_ON_DESC";
+            ruleChoiceDef8.onlyShowInGameBrowserIfNonDefault = true;
+            RuleChoiceDef ruleChoiceDef9 = ruleDef4.AddChoice("Off", false, true);
+            ruleChoiceDef9.tooltipNameToken = "";
+            ruleChoiceDef9.tooltipBodyToken = "RULE_ALLOWDROPIN_CHOICE_OFF_DESC";
+            ruleChoiceDef9.onlyShowInGameBrowserIfNonDefault = true;
+            ruleDef4.MakeNewestChoiceDefault();
+            RuleCatalog.AddRule(ruleDef4);
+            #endregion
             for (int k = 0; k < RuleCatalog.allRuleDefs.Count; k++)
             {
                 RuleDef ruleDef5 = RuleCatalog.allRuleDefs[k];

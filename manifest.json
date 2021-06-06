@@ -1,10 +1,11 @@
 {
-    "name": "AbyssalItemVotes",
-    "version_number": "1.0.1",
+    "name": "AbyssalLobby",
+    "version_number": "2.1.0",
     "website_url": "https://github.com/AbyssalLight/AbyssalItemVotes",
-    "description": "Enable and Disable Items within survivor selection menu",
+    "description": "Improvments to the survivor lobby",
     "dependencies": [
     		"bbepis-BepInExPack-5.4.9",
-		"tristanmcpherson-R2API-3.0.30"
+		"tristanmcpherson-R2API-3.0.43",
+		"KingEnderBrine-ScrollableLobbyUI-1.6.2"
     ]
 }
