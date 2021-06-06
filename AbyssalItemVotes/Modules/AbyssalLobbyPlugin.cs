@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using MonoMod.Cil;
 
 namespace AbyssalLobby.Modules
 {
@@ -10,13 +11,16 @@ namespace AbyssalLobby.Modules
     {
         public void Awake()
         {
-            LobbyImprovments lobbyImprovments = new LobbyImprovments();
             RuleCatalogEdits ruleCatalogEdits = new RuleCatalogEdits();
+            LobbyImprovments lobbyImprovments = new LobbyImprovments();
 
             AbyssalTokens.AddTokens();
-            ruleCatalogEdits.TurnOnCatalog();
-            ruleCatalogEdits.RuleCatalogInit();
-            lobbyImprovments.LobbyUI();
+            On.RoR2.RuleDef.AddChoice += ruleCatalogEdits.RuleDefAddChoice;
+            On.RoR2.RuleCatalog.HiddenTestItemsConvar += RuleCatalogEdits.RuleCatalogHiddenTestItemsConvar;
+            On.RoR2.RuleCatalog.HiddenTestTrue += RuleCatalogEdits.RuleCatalogHiddenTestTrue;
+            On.RoR2.RuleCatalog.Init += RuleCatalogEdits.RuleCatalogInit;
+
+            //IL.RoR2.UI.RuleCategoryController.SetData += new ILContext.Manipulator(lobbyImprovments.LobbyUI);
 
         }
     }

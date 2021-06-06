@@ -6,28 +6,19 @@ using RoR2;
 using R2API;
 using ScrollableLobbyUI;
 using UnityEngine;
-using UnityEngine.Events;
-using RoR2.UI;
+using MonoMod.Cil;
+using Mono.Cecil.Cil;
 
 namespace AbyssalLobby.Modules
 {
     class LobbyImprovments
     {
-        public void LobbyUI()
+        public void LobbyUI(ILContext il)
         {
-            On.RoR2.UI.RuleCategoryController.SetData += (On.RoR2.UI.RuleCategoryController.orig_SetData orig, RoR2.UI.RuleCategoryController self, RuleCategoryDef categoryDef, RuleChoiceMask availability, RuleBook ruleBook) => 
-            {
-                orig(self, categoryDef, availability, ruleBook);
-                this.minimizeResultGrid.GetComponent<HGButton>().onClick.AddListener(new UnityAction(this.CloseGrid));
-                RuleCatalog.RuleCategoryType ruleCategoryType = self.ruleCategoryType;
-                if (ruleCategoryType != RuleCatalog.RuleCategoryType.StripVote)
-                {
-                    if (ruleCategoryType == RuleCatalog.RuleCategoryType.VoteResultGrid)
-                    {
-                        self.voteResultGridContainer.gameObject.SetActive(false);
-                    }
-                }
-            };
+            ILCursor ilcursor = new ILCursor(il);
+            ILCursor ilcursor2 = ilcursor;
+
+
         }
 
         private void CloseGrid()
