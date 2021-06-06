@@ -1,22 +1,17 @@
 ﻿using BepInEx;
 using RoR2;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System;
+using System.Text;
 using UnityEngine;
 
 namespace AbyssalLobby.Modules
 {
-    [BepInDependency("com.bepis.r2api")]
-
-    [BepInPlugin("com.AbyssalLight.AbyssalLobby", "AbyssalLobby", "1.1.0")]
-
-    class AbyssalBlacklister : BaseUnityPlugin
+    class RuleCatalogEdits
     {
-        public void Awake()
+        public void TurnOnCatalog()
         {
-            AbyssalTokens.AddTokens();
-
             On.RoR2.RuleDef.AddChoice += (orig, self, choiceName, extraData, excludeByDefault) =>
             {
                 excludeByDefault = false;
@@ -33,7 +28,10 @@ namespace AbyssalLobby.Modules
             {
                 return false;
             };
+        }
 
+        public void RuleCatalogInit()
+        {
             On.RoR2.RuleCatalog.Init += (orig) =>
             {
                 #region Difficulty/Artifact

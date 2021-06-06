@@ -13,7 +13,7 @@ namespace AbyssalLobby.Modules
 {
     class LobbyImprovments
     {
-        public void Awake()
+        public void LobbyUI()
         {
             On.RoR2.UI.RuleCategoryController.SetData += (On.RoR2.UI.RuleCategoryController.orig_SetData orig, RoR2.UI.RuleCategoryController self, RuleCategoryDef categoryDef, RuleChoiceMask availability, RuleBook ruleBook) => 
             {
