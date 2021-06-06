@@ -27,7 +27,7 @@ namespace AbyssalLobby.Modules
         public static void RuleCatalogInit(On.RoR2.RuleCatalog.orig_Init orig)
         {
             #region Difficulty/Artifact
-            RuleCatalog.AddCategory("RULE_HEADER_DIFFICULTY", "", new Color32(43, 124, 181, byte.MaxValue));
+            RuleCatalog.AddCategory("RULE_HEADER_DIFFICULTY", "", new Color32(255, 0, 0, byte.MaxValue));
             RuleCatalog.AddRule(RuleDef.FromDifficulty());
             RuleCatalog.artifactRuleCategory = RuleCatalog.AddCategory("RULE_HEADER_ARTIFACTS", "RULE_HEADER_ARTIFACTS_SUBTITLE", ColorCatalog.GetColor(ColorCatalog.ColorIndex.Artifact), "RULE_ARTIFACTS_EMPTY_TIP", "RULE_HEADER_ARTIFACTS_EDIT", new Func<bool>(RuleCatalog.HiddenTestFalse), RuleCatalog.RuleCategoryType.VoteResultGrid);
             for (ArtifactIndex artifactIndex = 0; artifactIndex < (ArtifactIndex)ArtifactCatalog.artifactCount; artifactIndex++)
@@ -81,7 +81,7 @@ namespace AbyssalLobby.Modules
             #endregion
 
             #region ItemsTier3
-            RuleCatalog.AddCategory("RULE_HEADER_ITEMS_TIER3", "RULE_HEADER_ITEMS_TIER3_SUBTITLE", new Color32(204, 0, 0, byte.MaxValue), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestItemsConvar), RuleCatalog.RuleCategoryType.VoteResultGrid);
+            RuleCatalog.AddCategory("RULE_HEADER_ITEMS_TIER3", "RULE_HEADER_ITEMS_TIER3_SUBTITLE", new Color32(255, 0, 0, byte.MaxValue), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestItemsConvar), RuleCatalog.RuleCategoryType.VoteResultGrid);
             List<ItemIndex> list3 = new List<ItemIndex>();
             ItemIndex item3Index = 0;
             ItemIndex item3Count = (ItemIndex)ItemCatalog.itemCount;
