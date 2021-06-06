@@ -1,9 +1,7 @@
-﻿using BepInEx;
-using RoR2;
+﻿using RoR2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
 
 namespace AbyssalLobby.Modules
