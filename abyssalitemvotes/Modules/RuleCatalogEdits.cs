@@ -29,7 +29,7 @@ namespace AbyssalLobby.Modules
         public static void RuleCatalogInit(On.RoR2.RuleCatalog.orig_Init orig)
         {
             #region Difficulty/Artifact
-            RuleCatalog.AddCategory("RULE_HEADER_DIFFICULTY", "", new Color32(255, 0, 0, byte.MaxValue));
+            RuleCatalog.AddCategory("RULE_HEADER_DIFFICULTY", "", ColorCatalog.GetColor(ColorCatalog.ColorIndex.HardDifficulty));
             RuleCatalog.AddRule(RuleDef.FromDifficulty());
             RuleCatalog.artifactRuleCategory = RuleCatalog.AddCategory("RULE_HEADER_ARTIFACTS", "RULE_HEADER_ARTIFACTS_SUBTITLE", ColorCatalog.GetColor(ColorCatalog.ColorIndex.Artifact), "RULE_ARTIFACTS_EMPTY_TIP", "RULE_HEADER_ARTIFACTS_EDIT", new Func<bool>(RuleCatalog.HiddenTestFalse), RuleCatalog.RuleCategoryType.VoteResultGrid);
             for (ArtifactIndex artifactIndex = 0; artifactIndex < (ArtifactIndex)ArtifactCatalog.artifactCount; artifactIndex++)
