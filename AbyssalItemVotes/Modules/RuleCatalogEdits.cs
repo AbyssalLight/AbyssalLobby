@@ -39,7 +39,7 @@ namespace AbyssalLobby.Modules
             #endregion
 
             #region ItemsTier1
-            RuleCatalog.AddCategory("RULE_HEADER_ITEMS_TIER1", "RULE_HEADER_ITEMS_TIER1_SUBTITLE", new Color32(255, 255, 255, byte.MaxValue), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestItemsConvar), RuleCatalog.RuleCategoryType.VoteResultGrid);
+            RuleCatalog.AddCategory("RULE_HEADER_ITEMS_TIER1", "RULE_HEADER_ITEMS_TIER1_SUBTITLE", ColorCatalog.GetColor(ColorCatalog.ColorIndex.Tier1Item), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestItemsConvar), RuleCatalog.RuleCategoryType.VoteResultGrid);
             List<ItemIndex> list1 = new List<ItemIndex>();
             ItemIndex item1Index = 0;
             ItemIndex item1Count = (ItemIndex)ItemCatalog.itemCount;
@@ -61,7 +61,7 @@ namespace AbyssalLobby.Modules
             #endregion
 
             #region ItemsTier2
-            RuleCatalog.AddCategory("RULE_HEADER_ITEMS_TIER2", "RULE_HEADER_ITEMS_TIER2_SUBTITLE", new Color32(0, 153, 51, byte.MaxValue), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestItemsConvar), RuleCatalog.RuleCategoryType.VoteResultGrid);
+            RuleCatalog.AddCategory("RULE_HEADER_ITEMS_TIER2", "RULE_HEADER_ITEMS_TIER2_SUBTITLE", ColorCatalog.GetColor(ColorCatalog.ColorIndex.Tier2Item), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestItemsConvar), RuleCatalog.RuleCategoryType.VoteResultGrid);
             List<ItemIndex> list2 = new List<ItemIndex>();
             ItemIndex item2Index = 0;
             ItemIndex item2Count = (ItemIndex)ItemCatalog.itemCount;
@@ -83,7 +83,7 @@ namespace AbyssalLobby.Modules
             #endregion
 
             #region ItemsTier3
-            RuleCatalog.AddCategory("RULE_HEADER_ITEMS_TIER3", "RULE_HEADER_ITEMS_TIER3_SUBTITLE", new Color32(255, 0, 0, byte.MaxValue), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestItemsConvar), RuleCatalog.RuleCategoryType.VoteResultGrid);
+            RuleCatalog.AddCategory("RULE_HEADER_ITEMS_TIER3", "RULE_HEADER_ITEMS_TIER3_SUBTITLE", ColorCatalog.GetColor(ColorCatalog.ColorIndex.Tier3Item), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestItemsConvar), RuleCatalog.RuleCategoryType.VoteResultGrid);
             List<ItemIndex> list3 = new List<ItemIndex>();
             ItemIndex item3Index = 0;
             ItemIndex item3Count = (ItemIndex)ItemCatalog.itemCount;
@@ -105,7 +105,7 @@ namespace AbyssalLobby.Modules
             #endregion
 
             #region ItemsTierLunar
-            RuleCatalog.AddCategory("RULE_HEADER_ITEMS_TIER_LUNAR", "RULE_HEADER_ITEMS_TIER_LUNAR_SUBTITLE", new Color32(0, 153, 255, byte.MaxValue), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestItemsConvar), RuleCatalog.RuleCategoryType.VoteResultGrid);
+            RuleCatalog.AddCategory("RULE_HEADER_ITEMS_TIER_LUNAR", "RULE_HEADER_ITEMS_TIER_LUNAR_SUBTITLE", ColorCatalog.GetColor(ColorCatalog.ColorIndex.LunarItem), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestItemsConvar), RuleCatalog.RuleCategoryType.VoteResultGrid);
             List<ItemIndex> list4 = new List<ItemIndex>();
             ItemIndex item4Index = 0;
             ItemIndex item4Count = (ItemIndex)ItemCatalog.itemCount;
@@ -127,7 +127,7 @@ namespace AbyssalLobby.Modules
             #endregion
 
             #region ItemsTierBoss
-            RuleCatalog.AddCategory("RULE_HEADER_ITEMS_TIER_BOSS", "RULE_HEADER_ITEMS_TIER_BOSS_SUBTITLE", new Color32(255, 255, 102, byte.MaxValue), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestItemsConvar), RuleCatalog.RuleCategoryType.VoteResultGrid);
+            RuleCatalog.AddCategory("RULE_HEADER_ITEMS_TIER_BOSS", "RULE_HEADER_ITEMS_TIER_BOSS_SUBTITLE", ColorCatalog.GetColor(ColorCatalog.ColorIndex.BossItem), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestItemsConvar), RuleCatalog.RuleCategoryType.VoteResultGrid);
             List<ItemIndex> list5 = new List<ItemIndex>();
             ItemIndex item5Index = 0;
             ItemIndex item5Count = (ItemIndex)ItemCatalog.itemCount;
@@ -149,7 +149,7 @@ namespace AbyssalLobby.Modules
             #endregion
 
             #region Equipment
-            RuleCatalog.AddCategory("RULE_HEADER_EQUIPMENT", "RULE_HEADER_ITEMSANDEQUIPMENT_SUBTITLE", new Color32(byte.MaxValue, 128, 0, byte.MaxValue), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestItemsConvar), RuleCatalog.RuleCategoryType.VoteResultGrid);
+            RuleCatalog.AddCategory("RULE_HEADER_EQUIPMENT", "RULE_HEADER_ITEMSANDEQUIPMENT_SUBTITLE", ColorCatalog.GetColor(ColorCatalog.ColorIndex.Equipment), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestItemsConvar), RuleCatalog.RuleCategoryType.VoteResultGrid);
             List<EquipmentIndex> list6 = new List<EquipmentIndex>();
             EquipmentIndex equipmentIndex = 0;
             EquipmentIndex equipmentCount = (EquipmentIndex)EquipmentCatalog.equipmentCount;
@@ -261,6 +261,7 @@ namespace AbyssalLobby.Modules
             ruleChoiceDef.tooltipNameToken = itemDef.nameToken;
             ruleChoiceDef.tooltipBodyToken = itemDef.descriptionToken; // line edit
             ruleChoiceDef.unlockable = itemDef.unlockableDef;
+            ruleChoiceDef.tooltipNameColor = ColorCatalog.GetColor(itemDef.colorIndex); // new line
             ruleChoiceDef.itemIndex = itemIndex;
             ruleChoiceDef.onlyShowInGameBrowserIfNonDefault = true;
             ruleDef.MakeNewestChoiceDefault();
@@ -269,6 +270,7 @@ namespace AbyssalLobby.Modules
             ruleChoiceDef2.tooltipNameToken = itemDef.nameToken;
             ruleChoiceDef2.getTooltipName = new Func<RuleChoiceDef, string>(RuleChoiceDef.GetOffTooltipNameFromToken);
             ruleChoiceDef2.tooltipBodyToken = itemDef.descriptionToken; // line edit
+            ruleChoiceDef2.tooltipNameColor = ColorCatalog.GetColor(itemDef.darkColorIndex); // new line
             ruleChoiceDef2.onlyShowInGameBrowserIfNonDefault = true;
             return ruleDef;
         }
@@ -282,6 +284,7 @@ namespace AbyssalLobby.Modules
             ruleChoiceDef.tooltipNameToken = equipmentDef.nameToken;
             ruleChoiceDef.tooltipBodyToken = equipmentDef.descriptionToken; // line edit
             ruleChoiceDef.unlockable = equipmentDef.unlockableDef;
+            ruleChoiceDef.tooltipNameColor = ColorCatalog.GetColor(equipmentDef.colorIndex); // new line
             ruleChoiceDef.equipmentIndex = equipmentIndex;
             ruleChoiceDef.availableInMultiPlayer = equipmentDef.appearsInMultiPlayer;
             ruleChoiceDef.availableInSinglePlayer = equipmentDef.appearsInSinglePlayer;
@@ -292,6 +295,7 @@ namespace AbyssalLobby.Modules
             ruleChoiceDef2.tooltipNameToken = equipmentDef.nameToken;
             ruleChoiceDef2.getTooltipName = new Func<RuleChoiceDef, string>(RuleChoiceDef.GetOffTooltipNameFromToken);
             ruleChoiceDef2.tooltipBodyToken = equipmentDef.descriptionToken; // line edit
+            ruleChoiceDef2.tooltipNameColor = new Color32(179, 71, 0, byte.MaxValue); // new line
             ruleChoiceDef2.onlyShowInGameBrowserIfNonDefault = true;
             return ruleDef;
         }
