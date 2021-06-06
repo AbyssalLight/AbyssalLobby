@@ -13,6 +13,7 @@ This is a mod planned to add improvments to your modded experiance.
 
 #Updates
 ```
+2.2.1 - Color improvments
 2.2.0 - Added Item and Equipment Descriptions in lobby
 2.1.0 - Fixed RuleBook.GetRuleChoice error
 2.0.0 - Re-release as AbyssalLobby
