@@ -4,6 +4,8 @@ using MonoMod.Cil;
 namespace AbyssalLobby.Modules
 {
     [BepInDependency("com.bepis.r2api")]
+    [BepInDependency("com.KingEnderBrine.ScrollableLobbyUI")]
+    [BepInIncompatibility("")]
 
     [BepInPlugin("com.AbyssalLight.AbyssalLobby", "AbyssalLobby", "2.0.0")]
 
