@@ -14,6 +14,7 @@ This is a mod planned to add improvments to your modded experiance.
 
 #Updates
 ```
+2.3.0 - 
 2.2.5 - ReadMe update and minor code organization
 2.2.2 -> 2.2.4 - oops
 2.2.1 - Color improvments

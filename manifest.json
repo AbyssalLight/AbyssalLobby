@@ -1,7 +1,7 @@
 {
     "name": "AbyssalLobby",
-    "version_number": "2.2.5",
-    "website_url": "https://github.com/AbyssalLight/AbyssalItemVotes",
+    "version_number": "2.3.0",
+    "website_url": "https://github.com/AbyssalLight/AbyssalLobby",
     "description": "Improvments to the survivor lobby",
     "dependencies": [
     		"bbepis-BepInExPack-5.4.9",

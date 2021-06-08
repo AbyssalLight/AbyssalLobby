@@ -17,9 +17,7 @@ namespace AbyssalLobby
     [BepInPlugin(MODUID, MODNAME, MODVERSION)]
     [R2APISubmoduleDependency(new string[]
     {
-        "PrefabAPI",
-        "LanguageAPI",
-        "SoundAPI",
+         "LanguageAPI",
     })]
 
     class AbyssalLobbyPlugin : BaseUnityPlugin
