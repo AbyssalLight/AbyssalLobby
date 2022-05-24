@@ -1,6 +1,6 @@
 ﻿using AbyssalLobby.Modules;
 using BepInEx;
-using MonoMod.Cil;
+using RoR2.UI;
 using R2API.Utils;
 using System.Security;
 using System.Security.Permissions;
@@ -12,7 +12,6 @@ namespace AbyssalLobby
 {
     [BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("com.KingEnderBrine.ScrollableLobbyUI")]
-    [BepInIncompatibility("")]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     [BepInPlugin(MODUID, MODNAME, MODVERSION)]
     [R2APISubmoduleDependency(new string[]
@@ -34,19 +33,12 @@ namespace AbyssalLobby
         {
             instance = this;
 
-            RuleCatalogEdits ruleCatalogEdits = new RuleCatalogEdits();
-            LobbyImprovments lobbyImprovments = new LobbyImprovments();
-
             AbyssalTokens.AddTokens();
-            On.RoR2.RuleDef.AddChoice += ruleCatalogEdits.RuleDefAddChoice;
-            On.RoR2.RuleCatalog.HiddenTestItemsConvar += RuleCatalogEdits.RuleCatalogHiddenTestItemsConvar;
-            On.RoR2.RuleCatalog.HiddenTestTrue += RuleCatalogEdits.RuleCatalogHiddenTestTrue;
-            On.RoR2.RuleCatalog.Init += RuleCatalogEdits.RuleCatalogInit;
-            On.RoR2.RuleDef.FromItem += RuleCatalogEdits.ItemDescriptions;
-            On.RoR2.RuleDef.FromEquipment += RuleCatalogEdits.EquipmentDescriptions;
-
-            On.RoR2.UI.RuleCategoryController.SetData += lobbyImprovments.LobbyUI;
-
+            On.RoR2.RuleCatalog.Init += delegate(On.RoR2.RuleCatalog.orig_Init orig)
+            {
+                orig();
+                RuleCatalogEdits.RuleCatalogInit();
+            };
         }
     }
 }

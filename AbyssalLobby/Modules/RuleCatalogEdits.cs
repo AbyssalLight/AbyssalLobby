@@ -1,4 +1,5 @@
-﻿using R2API;
+﻿using MonoMod.Cil;
+using R2API;
 using RoR2;
 using RoR2.UI;
 using System;
@@ -10,37 +11,12 @@ namespace AbyssalLobby.Modules
 {
     internal class RuleCatalogEdits
     {
-        public RuleChoiceDef RuleDefAddChoice(On.RoR2.RuleDef.orig_AddChoice orig, RoR2.RuleDef self, string choiceName, object extraData = null, bool excludeByDefault = false)
+        public static void RuleCatalogInit()
         {
-            var myvar = orig(self, choiceName, extraData, excludeByDefault);
-            return myvar;
-        }
+            string prefix = AbyssalLobbyPlugin.developerPrefix + "_ITEMS_";
 
-        public static bool RuleCatalogHiddenTestItemsConvar(On.RoR2.RuleCatalog.orig_HiddenTestItemsConvar orig)
-        {
-            return false;
-        }
-
-        public static bool RuleCatalogHiddenTestTrue(On.RoR2.RuleCatalog.orig_HiddenTestTrue orig)
-        {
-            return false;
-        }
-
-        public static void RuleCatalogInit(On.RoR2.RuleCatalog.orig_Init orig)
-        {
-            string prefix = AbyssalLobbyPlugin.developerPrefix + "_ITEMS_"; // new line
-
-            RuleCatalog.AddCategory("RULE_HEADER_DIFFICULTY", "", new Color32(43, 124, 181, byte.MaxValue));
-            RuleCatalog.AddRule(RuleDef.FromDifficulty());
-            RuleCatalog.artifactRuleCategory = RuleCatalog.AddCategory("RULE_HEADER_ARTIFACTS", "RULE_HEADER_ARTIFACTS_SUBTITLE", ColorCatalog.GetColor(ColorCatalog.ColorIndex.Artifact), "RULE_ARTIFACTS_EMPTY_TIP", "RULE_HEADER_ARTIFACTS_EDIT", new Func<bool>(RuleCatalog.HiddenTestFalse), RuleCatalog.RuleCategoryType.VoteResultGrid);
-            for (ArtifactIndex artifactIndex = 0; artifactIndex < (ArtifactIndex)ArtifactCatalog.artifactCount; artifactIndex++)
-            {
-                RuleCatalog.AddRule(RuleDef.FromArtifact(artifactIndex));
-            }
-
-            #region Replacment Category
             #region ItemsTier1
-            RuleCatalog.AddCategory(prefix + "RULE_HEADER_ITEMS_TIER1", prefix + "RULE_HEADER_ITEMS_TIER1_SUBTITLE", ColorCatalog.GetColor(ColorCatalog.ColorIndex.Tier1Item), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestItemsConvar), RuleCatalog.RuleCategoryType.VoteResultGrid);
+            RuleCatalog.AddCategory(prefix + "RULE_HEADER_ITEMS_TIER1", prefix + "RULE_HEADER_ITEMS_TIER1_SUBTITLE", ColorCatalog.GetColor(ColorCatalog.ColorIndex.Tier1Item), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestFalse), RuleCatalog.RuleCategoryType.VoteResultGrid);
             List<ItemIndex> list1 = new List<ItemIndex>();
             ItemIndex item1Index = 0;
             ItemIndex item1Count = (ItemIndex)ItemCatalog.itemCount;
@@ -54,15 +30,14 @@ namespace AbyssalLobby.Modules
             }
             foreach (ItemIndex item1Index2 in from i in list1
                                               where ItemCatalog.GetItemDef(i).inDroppableTier
-                                              orderby ItemCatalog.GetItemDef(i).tier
                                               select i)
             {
-                RuleCatalog.AddRule(RuleDef.FromItem(item1Index2));
+                RuleCatalog.AddRule(ForItems(item1Index2));
             }
             #endregion
 
             #region ItemsTier2
-            RuleCatalog.AddCategory(prefix + "RULE_HEADER_ITEMS_TIER2", prefix + "RULE_HEADER_ITEMS_TIER2_SUBTITLE", ColorCatalog.GetColor(ColorCatalog.ColorIndex.Tier2Item), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestItemsConvar), RuleCatalog.RuleCategoryType.VoteResultGrid);
+            RuleCatalog.AddCategory(prefix + "RULE_HEADER_ITEMS_TIER2", prefix + "RULE_HEADER_ITEMS_TIER2_SUBTITLE", ColorCatalog.GetColor(ColorCatalog.ColorIndex.Tier2Item), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestFalse), RuleCatalog.RuleCategoryType.VoteResultGrid);
             List<ItemIndex> list2 = new List<ItemIndex>();
             ItemIndex item2Index = 0;
             ItemIndex item2Count = (ItemIndex)ItemCatalog.itemCount;
@@ -76,15 +51,14 @@ namespace AbyssalLobby.Modules
             }
             foreach (ItemIndex item2Index2 in from i in list2
                                               where ItemCatalog.GetItemDef(i).inDroppableTier
-                                              orderby ItemCatalog.GetItemDef(i).tier
                                               select i)
             {
-                RuleCatalog.AddRule(RuleDef.FromItem(item2Index2));
+                RuleCatalog.AddRule(ForItems(item2Index2));
             }
             #endregion
 
             #region ItemsTier3
-            RuleCatalog.AddCategory(prefix + "RULE_HEADER_ITEMS_TIER3", prefix + "RULE_HEADER_ITEMS_TIER3_SUBTITLE", ColorCatalog.GetColor(ColorCatalog.ColorIndex.Tier3Item), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestItemsConvar), RuleCatalog.RuleCategoryType.VoteResultGrid);
+            RuleCatalog.AddCategory(prefix + "RULE_HEADER_ITEMS_TIER3", prefix + "RULE_HEADER_ITEMS_TIER3_SUBTITLE", ColorCatalog.GetColor(ColorCatalog.ColorIndex.Tier3Item), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestFalse), RuleCatalog.RuleCategoryType.VoteResultGrid);
             List<ItemIndex> list3 = new List<ItemIndex>();
             ItemIndex item3Index = 0;
             ItemIndex item3Count = (ItemIndex)ItemCatalog.itemCount;
@@ -98,15 +72,14 @@ namespace AbyssalLobby.Modules
             }
             foreach (ItemIndex item3Index2 in from i in list3
                                               where ItemCatalog.GetItemDef(i).inDroppableTier
-                                              orderby ItemCatalog.GetItemDef(i).tier
                                               select i)
             {
-                RuleCatalog.AddRule(RuleDef.FromItem(item3Index2));
+                RuleCatalog.AddRule(ForItems(item3Index2));
             }
             #endregion
 
             #region ItemsTierLunar
-            RuleCatalog.AddCategory(prefix + "RULE_HEADER_ITEMS_TIER_LUNAR", prefix + "RULE_HEADER_ITEMS_TIER_LUNAR_SUBTITLE", ColorCatalog.GetColor(ColorCatalog.ColorIndex.LunarItem), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestItemsConvar), RuleCatalog.RuleCategoryType.VoteResultGrid);
+            RuleCatalog.AddCategory(prefix + "RULE_HEADER_ITEMS_TIER_LUNAR", prefix + "RULE_HEADER_ITEMS_TIER_LUNAR_SUBTITLE", ColorCatalog.GetColor(ColorCatalog.ColorIndex.LunarItem), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestFalse), RuleCatalog.RuleCategoryType.VoteResultGrid);
             List<ItemIndex> list4 = new List<ItemIndex>();
             ItemIndex item4Index = 0;
             ItemIndex item4Count = (ItemIndex)ItemCatalog.itemCount;
@@ -120,15 +93,14 @@ namespace AbyssalLobby.Modules
             }
             foreach (ItemIndex item4Index2 in from i in list4
                                               where ItemCatalog.GetItemDef(i).inDroppableTier
-                                              orderby ItemCatalog.GetItemDef(i).tier
                                               select i)
             {
-                RuleCatalog.AddRule(RuleDef.FromItem(item4Index2));
+                RuleCatalog.AddRule(ForItems(item4Index2));
             }
             #endregion
 
             #region ItemsTierBoss
-            RuleCatalog.AddCategory(prefix + "RULE_HEADER_ITEMS_TIER_BOSS", prefix + "RULE_HEADER_ITEMS_TIER_BOSS_SUBTITLE", ColorCatalog.GetColor(ColorCatalog.ColorIndex.BossItem), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestItemsConvar), RuleCatalog.RuleCategoryType.VoteResultGrid);
+            RuleCatalog.AddCategory(prefix + "RULE_HEADER_ITEMS_TIER_BOSS", prefix + "RULE_HEADER_ITEMS_TIER_BOSS_SUBTITLE", ColorCatalog.GetColor(ColorCatalog.ColorIndex.BossItem), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestFalse), RuleCatalog.RuleCategoryType.VoteResultGrid);
             List<ItemIndex> list5 = new List<ItemIndex>();
             ItemIndex item5Index = 0;
             ItemIndex item5Count = (ItemIndex)ItemCatalog.itemCount;
@@ -142,15 +114,14 @@ namespace AbyssalLobby.Modules
             }
             foreach (ItemIndex item5Index2 in from i in list5
                                               where ItemCatalog.GetItemDef(i).inDroppableTier
-                                              orderby ItemCatalog.GetItemDef(i).tier
                                               select i)
             {
-                RuleCatalog.AddRule(RuleDef.FromItem(item5Index2));
+                RuleCatalog.AddRule(ForItems(item5Index2));
             }
             #endregion
 
             #region Equipment
-            RuleCatalog.AddCategory("RULE_HEADER_EQUIPMENT", "RULE_HEADER_ITEMSANDEQUIPMENT_SUBTITLE", ColorCatalog.GetColor(ColorCatalog.ColorIndex.Equipment), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestItemsConvar), RuleCatalog.RuleCategoryType.VoteResultGrid);
+            RuleCatalog.AddCategory("RULE_HEADER_EQUIPMENT", "RULE_HEADER_ITEMSANDEQUIPMENT_SUBTITLE", ColorCatalog.GetColor(ColorCatalog.ColorIndex.Equipment), null, "RULE_HEADER_ITEMSANDEQUIPMENT_EDIT", new Func<bool>(RuleCatalog.HiddenTestFalse), RuleCatalog.RuleCategoryType.VoteResultGrid);
             List<EquipmentIndex> list6 = new List<EquipmentIndex>();
             EquipmentIndex equipmentIndex = 0;
             EquipmentIndex equipmentCount = (EquipmentIndex)EquipmentCatalog.equipmentCount;
@@ -164,130 +135,60 @@ namespace AbyssalLobby.Modules
                                                        orderby EquipmentCatalog.GetEquipmentDef(i).isLunar
                                                        select i)
             {
-                RuleCatalog.AddRule(RuleDef.FromEquipment(equipmentIndex2));
+                RuleCatalog.AddRule(ForEquipment(equipmentIndex2));
             }
             #endregion
-            #endregion
-
-            RuleCatalog.AddCategory("RULE_HEADER_MISC", "", new Color32(192, 192, 192, byte.MaxValue), null, "", new Func<bool>(RuleCatalog.HiddenTestFalse), RuleCatalog.RuleCategoryType.VoteResultGrid);
-            RuleDef ruleDef = new RuleDef("Misc.StartingMoney", "RULE_MISC_STARTING_MONEY");
-            RuleChoiceDef ruleChoiceDef = ruleDef.AddChoice("0", 0U, true);
-            ruleChoiceDef.tooltipNameToken = "RULE_STARTINGMONEY_CHOICE_0_NAME";
-            ruleChoiceDef.tooltipBodyToken = "RULE_STARTINGMONEY_CHOICE_0_DESC";
-            ruleChoiceDef.tooltipNameColor = ColorCatalog.GetColor(ColorCatalog.ColorIndex.LunarCoin);
-            ruleChoiceDef.onlyShowInGameBrowserIfNonDefault = true;
-            RuleChoiceDef ruleChoiceDef2 = ruleDef.AddChoice("15", 15U, true);
-            ruleChoiceDef2.tooltipNameToken = "RULE_STARTINGMONEY_CHOICE_15_NAME";
-            ruleChoiceDef2.tooltipBodyToken = "RULE_STARTINGMONEY_CHOICE_15_DESC";
-            ruleChoiceDef2.tooltipNameColor = ColorCatalog.GetColor(ColorCatalog.ColorIndex.LunarCoin);
-            ruleChoiceDef2.onlyShowInGameBrowserIfNonDefault = true;
-            ruleDef.MakeNewestChoiceDefault();
-            RuleChoiceDef ruleChoiceDef3 = ruleDef.AddChoice("50", 50U, true);
-            ruleChoiceDef3.tooltipNameToken = "RULE_STARTINGMONEY_CHOICE_50_NAME";
-            ruleChoiceDef3.tooltipBodyToken = "RULE_STARTINGMONEY_CHOICE_50_DESC";
-            ruleChoiceDef3.spritePath = "Textures/MiscIcons/texRuleBonusStartingMoney";
-            ruleChoiceDef3.tooltipNameColor = ColorCatalog.GetColor(ColorCatalog.ColorIndex.LunarCoin);
-            ruleChoiceDef3.onlyShowInGameBrowserIfNonDefault = true;
-            RuleCatalog.AddRule(ruleDef);
-            RuleDef ruleDef2 = new RuleDef("Misc.StageOrder", "RULE_MISC_STAGE_ORDER");
-            RuleChoiceDef ruleChoiceDef4 = ruleDef2.AddChoice("Normal", StageOrder.Normal, true);
-            ruleChoiceDef4.tooltipNameToken = "RULE_STAGEORDER_CHOICE_NORMAL_NAME";
-            ruleChoiceDef4.tooltipBodyToken = "RULE_STAGEORDER_CHOICE_NORMAL_DESC";
-            ruleChoiceDef4.tooltipNameColor = ColorCatalog.GetColor(ColorCatalog.ColorIndex.LunarCoin);
-            ruleChoiceDef4.onlyShowInGameBrowserIfNonDefault = true;
-            ruleDef2.MakeNewestChoiceDefault();
-            RuleChoiceDef ruleChoiceDef5 = ruleDef2.AddChoice("Random", StageOrder.Random, true);
-            ruleChoiceDef5.tooltipNameToken = "RULE_STAGEORDER_CHOICE_RANDOM_NAME";
-            ruleChoiceDef5.tooltipBodyToken = "RULE_STAGEORDER_CHOICE_RANDOM_DESC";
-            ruleChoiceDef5.spritePath = "Textures/MiscIcons/texRuleMapIsRandom";
-            ruleChoiceDef5.tooltipNameColor = ColorCatalog.GetColor(ColorCatalog.ColorIndex.LunarCoin);
-            ruleChoiceDef5.onlyShowInGameBrowserIfNonDefault = true;
-            RuleCatalog.AddRule(ruleDef2);
-            RuleDef ruleDef3 = new RuleDef("Misc.KeepMoneyBetweenStages", "RULE_MISC_KEEP_MONEY_BETWEEN_STAGES");
-            RuleChoiceDef ruleChoiceDef6 = ruleDef3.AddChoice("On", true, true);
-            ruleChoiceDef6.tooltipNameToken = "";
-            ruleChoiceDef6.tooltipBodyToken = "RULE_KEEPMONEYBETWEENSTAGES_CHOICE_ON_DESC";
-            ruleChoiceDef6.onlyShowInGameBrowserIfNonDefault = true;
-            RuleChoiceDef ruleChoiceDef7 = ruleDef3.AddChoice("Off", false, true);
-            ruleChoiceDef7.tooltipNameToken = "";
-            ruleChoiceDef7.tooltipBodyToken = "RULE_KEEPMONEYBETWEENSTAGES_CHOICE_OFF_DESC";
-            ruleChoiceDef7.onlyShowInGameBrowserIfNonDefault = true;
-            ruleDef3.MakeNewestChoiceDefault();
-            RuleCatalog.AddRule(ruleDef3);
-            RuleDef ruleDef4 = new RuleDef("Misc.AllowDropIn", "RULE_MISC_ALLOW_DROP_IN");
-            RuleChoiceDef ruleChoiceDef8 = ruleDef4.AddChoice("On", true, true);
-            ruleChoiceDef8.tooltipNameToken = "";
-            ruleChoiceDef8.tooltipBodyToken = "RULE_ALLOWDROPIN_CHOICE_ON_DESC";
-            ruleChoiceDef8.onlyShowInGameBrowserIfNonDefault = true;
-            RuleChoiceDef ruleChoiceDef9 = ruleDef4.AddChoice("Off", false, true);
-            ruleChoiceDef9.tooltipNameToken = "";
-            ruleChoiceDef9.tooltipBodyToken = "RULE_ALLOWDROPIN_CHOICE_OFF_DESC";
-            ruleChoiceDef9.onlyShowInGameBrowserIfNonDefault = true;
-            ruleDef4.MakeNewestChoiceDefault();
-            RuleCatalog.AddRule(ruleDef4);
-            for (int k = 0; k < RuleCatalog.allRuleDefs.Count; k++)
-            {
-                RuleDef ruleDef5 = RuleCatalog.allRuleDefs[k];
-                ruleDef5.globalIndex = k;
-                for (int j = 0; j < ruleDef5.choices.Count; j++)
-                {
-                    RuleChoiceDef ruleChoiceDef10 = ruleDef5.choices[j];
-                    ruleChoiceDef10.localIndex = j;
-                    ruleChoiceDef10.globalIndex = RuleCatalog.allChoicesDefs.Count;
-                    RuleCatalog.allChoicesDefs.Add(ruleChoiceDef10);
-                }
-                RuleCatalog._allChoiceDefsWithUnlocks = (from choiceDef in RuleCatalog.allChoicesDefs
-                                                         where choiceDef.unlockable
-                                                         select choiceDef).ToArray<RuleChoiceDef>();
-            }
-            RuleCatalog.availability.MakeAvailable();
         }
 
-        public static RuleDef ItemDescriptions(On.RoR2.RuleDef.orig_FromItem orig, ItemIndex itemIndex)
+        public static RuleDef ForItems(ItemIndex itemIndex)
         {
             ItemDef itemDef = ItemCatalog.GetItemDef(itemIndex);
             RuleDef ruleDef = new RuleDef("Items." + itemDef.name, itemDef.nameToken);
             RuleChoiceDef ruleChoiceDef = ruleDef.AddChoice("On", null, false);
             ruleChoiceDef.sprite = itemDef.pickupIconSprite;
             ruleChoiceDef.tooltipNameToken = itemDef.nameToken;
-            ruleChoiceDef.tooltipBodyToken = itemDef.descriptionToken; // line edit
+            ruleChoiceDef.tooltipBodyToken = itemDef.descriptionToken;
             ruleChoiceDef.unlockable = itemDef.unlockableDef;
-            ruleChoiceDef.tooltipNameColor = ColorCatalog.GetColor(itemDef.colorIndex); // new line
+            ruleChoiceDef.tooltipNameColor = ColorCatalog.GetColor(itemDef.colorIndex);
             ruleChoiceDef.itemIndex = itemIndex;
-            ruleChoiceDef.onlyShowInGameBrowserIfNonDefault = true;
+            ruleChoiceDef.selectionUISound = "Play_UI_artifactSelect";
+            ruleChoiceDef.extraData = itemDef;
             ruleDef.MakeNewestChoiceDefault();
             RuleChoiceDef ruleChoiceDef2 = ruleDef.AddChoice("Off", null, false);
             ruleChoiceDef2.spritePath = "Textures/MiscIcons/texUnlockIcon";
             ruleChoiceDef2.tooltipNameToken = itemDef.nameToken;
             ruleChoiceDef2.getTooltipName = new Func<RuleChoiceDef, string>(RuleChoiceDef.GetOffTooltipNameFromToken);
-            ruleChoiceDef2.tooltipBodyToken = itemDef.descriptionToken; // line edit
-            ruleChoiceDef2.tooltipNameColor = ColorCatalog.GetColor(itemDef.darkColorIndex); // new line
-            ruleChoiceDef2.onlyShowInGameBrowserIfNonDefault = true;
+            ruleChoiceDef2.tooltipBodyToken = itemDef.descriptionToken;
+            ruleChoiceDef2.tooltipNameColor = ColorCatalog.GetColor(ColorCatalog.ColorIndex.Unaffordable);
+            ruleChoiceDef.selectionUISound = "Play_UI_artifactDeselect";
+            ruleChoiceDef.extraData = itemDef;
             return ruleDef;
         }
 
-        public static RuleDef EquipmentDescriptions(On.RoR2.RuleDef.orig_FromEquipment orig ,EquipmentIndex equipmentIndex)
+        public static RuleDef ForEquipment(EquipmentIndex equipmentIndex)
         {
             EquipmentDef equipmentDef = EquipmentCatalog.GetEquipmentDef(equipmentIndex);
             RuleDef ruleDef = new RuleDef("Equipment." + equipmentDef.name, equipmentDef.nameToken);
             RuleChoiceDef ruleChoiceDef = ruleDef.AddChoice("On", null, false);
             ruleChoiceDef.sprite = equipmentDef.pickupIconSprite;
             ruleChoiceDef.tooltipNameToken = equipmentDef.nameToken;
-            ruleChoiceDef.tooltipBodyToken = equipmentDef.descriptionToken; // line edit
+            ruleChoiceDef.tooltipBodyToken = equipmentDef.descriptionToken;
             ruleChoiceDef.unlockable = equipmentDef.unlockableDef;
-            ruleChoiceDef.tooltipNameColor = ColorCatalog.GetColor(equipmentDef.colorIndex); // new line
+            ruleChoiceDef.tooltipNameColor = ColorCatalog.GetColor(equipmentDef.colorIndex);
             ruleChoiceDef.equipmentIndex = equipmentIndex;
+            ruleChoiceDef.selectionUISound = "Play_UI_artifactSelect";
+            ruleChoiceDef.extraData = equipmentDef;
             ruleChoiceDef.availableInMultiPlayer = equipmentDef.appearsInMultiPlayer;
             ruleChoiceDef.availableInSinglePlayer = equipmentDef.appearsInSinglePlayer;
-            ruleChoiceDef.onlyShowInGameBrowserIfNonDefault = true;
             ruleDef.MakeNewestChoiceDefault();
             RuleChoiceDef ruleChoiceDef2 = ruleDef.AddChoice("Off", null, false);
-            ruleChoiceDef2.spritePath = "Textures/MiscIcons/texUnlockIcon"; // line edit
+            ruleChoiceDef2.spritePath = "Textures/MiscIcons/texUnlockIcon";
             ruleChoiceDef2.tooltipNameToken = equipmentDef.nameToken;
             ruleChoiceDef2.getTooltipName = new Func<RuleChoiceDef, string>(RuleChoiceDef.GetOffTooltipNameFromToken);
-            ruleChoiceDef2.tooltipBodyToken = equipmentDef.descriptionToken; // line edit
-            ruleChoiceDef2.tooltipNameColor = new Color32(179, 71, 0, byte.MaxValue); // new line
-            ruleChoiceDef2.onlyShowInGameBrowserIfNonDefault = true;
+            ruleChoiceDef2.tooltipBodyToken = equipmentDef.descriptionToken;
+            ruleChoiceDef2.tooltipNameColor = ColorCatalog.GetColor(ColorCatalog.ColorIndex.Unaffordable);
+            ruleChoiceDef.selectionUISound = "Play_UI_artifactDeselect";
+            ruleChoiceDef.extraData = equipmentDef;
             return ruleDef;
         }
     }
