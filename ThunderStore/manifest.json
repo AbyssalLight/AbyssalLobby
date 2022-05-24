@@ -1,8 +1,8 @@
 {
-    "name": "AbyssalLobby",
-    "version_number": "2.3.0",
+    "name": "AL_Lobby",
+    "version_number": "3.0.0",
     "website_url": "https://github.com/AbyssalLight/AbyssalLobby",
-    "description": "Improvments to the survivor lobby",
+    "description": "Lobby Item Blacklister, and more",
     "dependencies": [
     		"bbepis-BepInExPack-5.4.9",
 		"tristanmcpherson-R2API-3.0.43",

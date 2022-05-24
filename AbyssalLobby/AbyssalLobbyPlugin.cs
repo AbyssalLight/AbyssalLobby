@@ -22,8 +22,8 @@ namespace AbyssalLobby
     class AbyssalLobbyPlugin : BaseUnityPlugin
     {
         public const string MODUID = "com.AbyssalLight.AbyssalLobby";
-        public const string MODNAME = "AbyssalLobby";
-        public const string MODVERSION = "2.3.0";
+        public const string MODNAME = "AL_Lobby";
+        public const string MODVERSION = "3.0.0";
 
         public const string developerPrefix = "ABYSS";
 
